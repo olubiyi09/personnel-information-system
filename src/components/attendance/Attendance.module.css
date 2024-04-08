@@ -1,0 +1,72 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height: 90vh;
+}
+
+.card {
+    width: 40%;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper {
+    margin-bottom: 20px;
+}
+
+.wrapper h1 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #114232;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.message {
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding: .5rem;
+}
+
+.green {
+    background-color: rgba(130, 238, 130, 0.795);
+}
+
+.red {
+    background-color: rgba(255, 130, 130, 0.603);
+}
+
+.input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.time-btn {
+    margin-top: 2rem;
+    display: flex;
+    column-gap: 1rem;
+    justify-content: center;
+}
+
+.btn {
+    padding: 8px 16px;
+    background-color: #f5f4a7;
+    color: #114232;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.time-btn button:nth-child(1) {
+    background-color: #114232;
+    color: #f5f4a7;
+}

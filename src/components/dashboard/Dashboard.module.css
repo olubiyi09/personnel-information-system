@@ -1,0 +1,10 @@
+.wrapper h1 {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #114232;
+}
+
+.allContent {
+    display: flex;
+    column-gap: 3rem;
+}

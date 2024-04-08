@@ -1,0 +1,33 @@
+.logo {
+    color: #f5f4a7;
+    font-size: 1.8rem;
+    font-weight: 500;
+    padding: .7rem 1rem;
+}
+
+.sidebar-items {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+
+}
+
+.sidebar-item {
+    margin-left: 1rem;
+    padding: .8rem 1rem;
+    font-weight: 500;
+    color: #f5f4a7;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+.sidebar-item.active {
+    background-color: #f5f4a7;
+    color: #114232;
+    transition: .3s ease-in-out;
+}
+
+.logout {
+    position: absolute;
+    bottom: 10px;
+}

@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/page.jsx", "src/components/calendar/Calendar.jsx", "src/components/clock/AnalogClock.jsx", "src/components/profile/Profile.jsx", "src/components/tasks/Tasks.jsx", "src/components/attendance/Attendance.jsx", "src/components/admin/Admin.jsx"],
   "exclude": ["node_modules"]
 }

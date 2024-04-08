@@ -1,0 +1,70 @@
+.calendar {
+    width: 300px;
+    height: fit-content;
+    margin-top: .7rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.header {
+    background-color: #114232;
+    color: #f5f4a7;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
+.select {
+    display: flex;
+    margin-top: 5px;
+    color: #114232;
+}
+
+.select select {
+    padding: 5px;
+}
+
+.selectone {
+    margin-right: 10px;
+}
+
+.days {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    background-color: #f9f9f9;
+    padding: 5px 0;
+}
+
+.day {
+    width: calc(100% / 7);
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+}
+
+.cell {
+    padding: 10px;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.cell:nth-child(7n) {
+    border-right: none;
+}
+
+.cell:nth-last-child(-n+3) {
+    border-bottom: none;
+}
+
+.currentDate {
+    background-color: #114232;
+    color: #f5f4a7;
+}

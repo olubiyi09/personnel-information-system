@@ -1,0 +1,19 @@
+.nav {
+    background-color: #114232;
+    padding: 0.5rem;
+}
+
+.nav ul {
+    display: flex;
+    justify-content: center;
+    column-gap: 1rem;
+}
+
+.nav ul li {
+    color: #f5f4a7;
+    cursor: pointer;
+}
+
+.nav ul li.active {
+    border-bottom: 1px solid #f5f4a7;
+}

@@ -1,0 +1,92 @@
+.nav {
+    display: flex;
+    column-gap: 2rem;
+}
+
+.nav button {
+    background: none;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #555;
+    cursor: pointer;
+}
+
+.nav button:focus {
+    outline: none;
+}
+
+.nav button.active {
+    border-bottom: 2px solid #114232;
+    color: #114232;
+}
+
+.content {
+    margin-top: 1rem;
+    padding-bottom: 3.5rem;
+    height: 370px;
+}
+
+.content .tab1 {
+    margin-top: 1rem;
+}
+
+.content .tab1 p {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    border-bottom: 1px solid rgb(236, 236, 236);
+    line-height: 2.1rem;
+}
+
+
+.tableContainer {
+    width: 100%;
+    overflow-x: auto;
+}
+
+
+.workExperienceTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.workExperienceTable th,
+.workExperienceTable td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.workExperienceTable th {
+    background-color: #114232;
+    color: #F7F6BB;
+}
+
+.workExperienceTable tr:hover {
+    background-color: #F7F6BB;
+}
+
+.evenRow {
+    background-color: #F7F6BB;
+}
+
+.edit-btn {
+    margin-top: 1.5rem;
+    position: absolute;
+    bottom: 2rem;
+    right: 4rem;
+}
+
+.edit-btn button {
+    background: #114232;
+    color: #F7F6BB;
+    padding: .5rem 2rem;
+    border-radius: 5px;
+    transition: .3s ease-in-out;
+}
+
+.edit-btn button:hover {
+    transform: translateY(-3px);
+}
