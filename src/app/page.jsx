@@ -9,7 +9,6 @@ import { FaTasks } from "react-icons/fa";
 import { FaRegCalendarCheck } from "react-icons/fa";
 import { RiHotelFill } from "react-icons/ri";
 import Dashboard from '@/components/dashboard/Dashboard';
-import LeaveManagement from '@/components/leaveManagement/LeaveManagement';
 import Profile from '@/components/profile/Profile';
 import Tasks from '@/components/tasks/Tasks';
 import Attendance from '@/components/attendance/Attendance';
@@ -18,6 +17,7 @@ import { toast } from 'sonner';
 import Loader from '@/components/loader/Loader';
 import { useRouter } from 'next/navigation';
 import Admin from '@/components/admin/Admin';
+import LeaveManagement from '@/components/leaveManagement/LeaveManagement';
 
 const menuItems = [
   {

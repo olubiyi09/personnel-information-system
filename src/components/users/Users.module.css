@@ -30,11 +30,9 @@
     background-color: #F7F6BB;
 }
 
-/* .select {
-    display: flex;
-    justify-content: center;
-    border: transparent;
-} */
+.select {
+    outline: none;
+}
 
 .evenRow {
     background-color: #F7F6BB;

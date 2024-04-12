@@ -17,10 +17,15 @@
     padding: 1.5rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     width: 30%;
+    /* height: 80vh; */
 }
 
-.left-section img {
+.left-section img,
+.left-section image {
     border: 1px solid #114232;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
 }
 
 .btns {
@@ -62,5 +67,6 @@
     margin-top: 1rem;
     padding: 1.5rem;
     width: 70%;
+    /* height: 80vh; */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }

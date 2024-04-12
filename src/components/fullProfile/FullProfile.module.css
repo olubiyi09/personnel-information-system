@@ -42,8 +42,16 @@
 
 
 .tableContainer {
+    display: flex;
+    flex-direction: column-reverse;
     width: 100%;
-    overflow-x: auto;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
 }
 
 
@@ -89,4 +97,153 @@
 
 .edit-btn button:hover {
     transform: translateY(-3px);
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modalContent {
+    width: 400px;
+    margin: 0 auto;
+}
+
+.modal h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #114232;
+    text-align: center;
+}
+
+.modalContent form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form input[type="text"],
+.form input[type="date"],
+.form select {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.form input[type="text"]:focus,
+.form input[type="date"]:focus,
+.form select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.submitButton {
+    padding: 10px 20px;
+    background-color: #114232;
+    color: #f5f4a7;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.cancelButton {
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.submitButton:hover,
+.cancelButton:hover {
+    opacity: 0.8;
+}
+
+.exp-btn {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.exp-btn button {
+    background-color: #114232;
+    color: #f5f4a7;
+    padding: .3rem 1rem;
+    border-radius: 3px;
+    height: fit-content;
+    margin-top: 1rem;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    column-gap: .5rem;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+
+.pagination {
+    margin-top: .9rem;
+}
+
+.paginationList {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.paginationList li {
+    display: inline-block;
+}
+
+.paginationList button {
+    background-color: #F7F6BB;
+    color: #114232;
+    padding: .2rem .8rem;
+    border: 1px solid #114232;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.paginationList button:hover {
+    background-color: #114232;
+    color: #fff;
+}
+
+.paginationList .activePage button {
+    background-color: #114232;
+    color: #fff;
 }

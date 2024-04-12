@@ -11,7 +11,8 @@ const AdminHome = ({ allUsers }: any) => {
     const unapprovedUsersCount: number = allUsers ? allUsers.filter((user: { role: string }) => user.role === "unapproved").length : 0;
     const numberofUsers = allUsers?.length
 
-    const chartData = [numberofUsers, 2, 1, unapprovedUsersCount];
+    // const chartData = [numberofUsers, 2, 1, unapprovedUsersCount];
+    const chartData = [25, 20, 15, 10];
     return (
         <div>
             {!allUsers ? (

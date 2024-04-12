@@ -54,6 +54,12 @@ const userSchema = new mongoose.Schema({
         default: "",
     },
 
+    profileimage: {
+        type: String,
+        required: false,
+        default: "https://res.cloudinary.com/dhikuxujd/image/upload/v1712794549/ww9wlfambw2x6dpy0p9r.png",
+    },
+
     position: {
         type: String,
         required: false,
@@ -73,29 +79,6 @@ const userSchema = new mongoose.Schema({
         type: [],
         required: false,
     },
-
-
-    // // Extra fields for employer
-    // establishmentYear: {
-    //     type: String,
-    //     required: false,
-    // },
-    // companySize: {
-    //     type: String,
-    //     required: false,
-    // },
-    // website: {
-    //     type: String,
-    //     required: false,
-    // },
-    // about: {
-    //     type: String,
-    //     required: false,
-    // },
-    // address: {
-    //     type: String,
-    //     required: false,
-    // },
 }, {
     timestamps: true,
 });
