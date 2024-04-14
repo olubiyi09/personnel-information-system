@@ -30,6 +30,7 @@
     font-size: 14px;
     margin-bottom: 10px;
     padding: .5rem;
+    text-align: center;
 }
 
 .green {
@@ -52,6 +53,7 @@
 
 .info {
     text-align: center;
+    margin-top: 2rem;
 }
 
 .time-btn {

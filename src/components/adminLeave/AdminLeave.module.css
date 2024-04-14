@@ -47,6 +47,10 @@
     background-color: #f5f4a7;
 }
 
+.table select {
+    outline: none;
+}
+
 /* .table tr:hover {
     background-color: #f5f4a7;
 } */
