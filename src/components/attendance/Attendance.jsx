@@ -73,7 +73,7 @@ const Attendance = () => {
             };
 
             const response = await axios.put("/api/attendance", requestBody);
-            console.log(response.data);
+            // console.log(response.data);
 
             if (response.status === 200) {
                 // Success: HTTP status code 200 means "OK"

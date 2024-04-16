@@ -32,6 +32,12 @@ const AdminNavbar = ({ onItemClick }: any) => {
                         <li className={activeItem === 'leave' ? styles.active : ''} onClick={() => handleItemClick('leave')}>
                             Leave
                         </li>
+                        <li className={activeItem === 'tasks' ? styles.active : ''} onClick={() => handleItemClick('tasks')}>
+                            Tasks
+                        </li>
+                        <li className={activeItem === 'updates' ? styles.active : ''} onClick={() => handleItemClick('updates')}>
+                            updates
+                        </li>
                     </ul>
                 </nav>
             </div>

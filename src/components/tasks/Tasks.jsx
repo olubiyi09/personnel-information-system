@@ -1,63 +1,88 @@
-import { useState, useEffect } from 'react';
-import styles from "./Tasks.module.css"
-import Modal from "../modal/Modal"
+import React, { useState, useEffect } from "react";
+import styles from "./Tasks.module.css";
+import Modal from "../modal/Modal";
 import { IoMdAdd } from "react-icons/io";
+import { setLoading } from "@/redux/loaderSlide";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "sonner";
+import axios from "axios";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
+  const [isAddTaskFormOpen, setAddTaskFormOpen] = useState(false);
+  const [allUsers, setAllUsers] = useState(null);
+  const [allTasks, setAllTasks] = useState(null);
+  const [allUsersFullName, setAllUsersFullName] = useState(null);
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    assignedTo: "",
+  });
+  const currentUser = useSelector((state) => state.users.currentUser);
+  const dispatch = useDispatch();
 
 
-  // Dummy tasks for testing
-  const dummyTasks = [
-    {
-      _id: '1',
-      title: 'Complete Project Proposal',
-      description: 'Write and finalize the project proposal for client review.',
-      status: 'Pending',
-      assignedTo: 'John Doe',
-    },
-    {
-      _id: '2',
-      title: 'Design Wireframes',
-      description: 'Create wireframe designs for the homepage and product page.',
-      status: 'In Progress',
-      assignedTo: 'Jane Smith',
-    },
-    {
-      _id: '3',
-      title: 'Develop Landing Page',
-      description: 'Code the landing page with HTML, CSS, and JavaScript.',
-      status: 'Completed',
-      assignedTo: 'Alex Johnson',
-    },
-    {
-      _id: '4',
-      title: 'Test Website Performance',
-      description: 'Run performance tests and optimize website loading speed.',
-      status: 'Pending',
-      assignedTo: 'Emily Brown',
-    },
-  ];
-
-  useEffect(() => {
-    // Fetch tasks from API
-    // For now, just use dummy tasks
-    setTasks(dummyTasks);
-  }, []);
-
-  const handleStatusChange = (taskId, newStatus) => {
-    // Update the status of the task locally
-    const updatedTasks = tasks.map((task) =>
-      task._id === taskId ? { ...task, status: newStatus } : task
-    );
-    setTasks(updatedTasks);
-
-    // Here you would typically send a request to update the status in the database
-    // For now, we'll just log the changes
-    console.log(`Task ID ${taskId} status changed to ${newStatus}`);
+  const getAllUser = async () => {
+    try {
+      dispatch(setLoading(true));
+      const response = await axios.get("/api/users/getallusers");
+      setAllUsers(response.data.data);
+      const users = response.data.data;
+      const fullNames = users.map((user) => user.fullname);
+      setAllUsersFullName([...fullNames]);
+    } catch (error) {
+      toast.error("something went wrong");
+    } finally {
+      dispatch(setLoading(false));
+    }
   };
 
+  const getTasks = async () => {
+    try {
+      dispatch(setLoading(true));
+      const response = await axios.get("/api/tasks");
+      const displayTasks = response.data.tasks.filter(task => task.assignedTo === currentUser.fullname);
+      setAllTasks(displayTasks)
+      // console.log(response.data.tasks);
+    } catch (error) {
+      // toast.error("No task found");
+      console.log("No task found");
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
+
+  useEffect(() => {
+    getAllUser();
+  }, []);
+
+  useEffect(() => {
+
+    getTasks()
+  }, []);
+
+
+  const handleStatusChange = async (taskId, newStatus) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await axios.put(`/api/tasks`, {
+        taskId: taskId,
+        status: newStatus,
+      });
+      const updatedTask = response.data.task;
+      const updatedTasks = tasks.map((task) =>
+        task._id === updatedTask._id ? updatedTask : task
+      );
+      setTasks(updatedTasks);
+      toast.success("Task status updated successfully!");
+      getTasks()
+    } catch (error) {
+      toast.error("Failed to update task status");
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
   const handleDescriptionClick = (task) => {
     setSelectedTask(task);
   };
@@ -66,13 +91,67 @@ const Tasks = () => {
     setSelectedTask(null);
   };
 
+  const handleAddTaskClick = () => {
+    setAddTaskFormOpen(true);
+  };
+
+  // const saveTask = async () => {
+  //   try {
+  //     dispatch(setLoading(true));
+
+  //     const response = await axios.post("/api/tasks", {
+  //       title: formData.title,
+  //       description: formData.description,
+  //       assignedTo: formData.assignedTo,
+  //       userID: currentUser._id,
+
+  //     });
+
+  //     const newTask = response.data;
+  //     // console.log(newTask);
+
+  //     setTasks([...tasks, newTask]);
+  //     toast.success("Task saved successfully!");
+  //     getTasks()
+  //   } catch (error) {
+  //     toast.error("Failed to save task");
+  //   } finally {
+  //     dispatch(setLoading(false));
+  //     setFormData({
+  //       title: "",
+  //       description: "",
+  //       assignedTo: "",
+  //     });
+  //     setAddTaskFormOpen(false);
+  //   }
+  // };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    saveTask();
+  };
+
+  const closeForm = () => {
+    setAddTaskFormOpen(false);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
   return (
     <div className={styles["tasks-wrapper"]}>
       <div className={styles["task-header"]}>
         <h1>Tasks</h1>
-        <button className="flex items-center">Assign Task <span className={styles.icon}><IoMdAdd size={18} /></span></button>
+        {/* <button className="flex items-center" onClick={handleAddTaskClick}>
+          Assign Task <span className={styles.icon}><IoMdAdd size={18} /></span>
+        </button> */}
       </div>
-      <table className={styles['task-table']}>
+      <table className={styles["task-table"]}>
         <thead>
           <tr>
             <th>#</th>
@@ -83,13 +162,13 @@ const Tasks = () => {
           </tr>
         </thead>
         <tbody>
-          {tasks.map((task, index) => (
+          {allTasks && allTasks.map((task, index) => (
             <tr key={task._id}>
               <td>{index + 1}</td>
               <td>{task.title}</td>
               <td>
                 <div
-                  className={styles['truncate']}
+                  className={styles["truncate"]}
                   onClick={() => handleDescriptionClick(task)}
                 >
                   {task.description.length > 50
@@ -105,7 +184,7 @@ const Tasks = () => {
                   }
                 >
                   <option value="Pending">Pending</option>
-                  <option value="In Progress">In Progress</option>
+                  <option value="InProgress">In Progress</option>
                   <option value="Completed">Completed</option>
                 </select>
               </td>
@@ -120,6 +199,70 @@ const Tasks = () => {
         title={selectedTask?.title}
         description={selectedTask?.description}
       />
+      {isAddTaskFormOpen && (
+        <div className={styles.modalOverlay} onClick={closeForm}>
+          <div
+            className={styles.modal}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.modalContent}>
+              <h2>Task Form</h2>
+              <form onSubmit={handleSubmit} className={styles.form}>
+                <label htmlFor="title">Title:</label>
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleChange}
+                  required
+                />
+
+                <label htmlFor="description">Description:</label>
+                <textarea
+                  id="description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  rows="4"
+                  required
+                ></textarea>
+
+                <label htmlFor="assignedTo">Assign to:</label>
+                <select
+                  id="assignedTo"
+                  name="assignedTo"
+                  value={formData.assignedTo}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="" disabled>
+                    Select Name
+                  </option>
+                  {allUsersFullName.map((name) => (
+                    <option key={name} value={name}>
+                      {name}
+                    </option>
+                  ))}
+                </select>
+
+                <div className={styles.buttonContainer}>
+                  <button type="submit" className={styles.submitButton}>
+                    Submit
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.cancelButton}
+                    onClick={closeForm}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

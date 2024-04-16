@@ -5,6 +5,8 @@ import AdminHome from '../adminHome/AdminHome';
 import Users from '../users/Users';
 import AdminAttendance from "../adminAttendance/AdminAttendance"
 import AdminLeave from "../adminLeave/AdminLeave"
+import PostUpdates from "../postUpdates/PostUpdates"
+import AdminTasks from "../adminTasks/AdminTasks"
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { setLoading } from '@/redux/loaderSlide';
@@ -34,6 +36,12 @@ const Admin = () => {
             break;
         case 'leave':
             content = <AdminLeave allUsers={allUsers} />;
+            break;
+        case 'updates':
+            content = <PostUpdates allUsers={allUsers} />;
+            break;
+        case 'tasks':
+            content = <AdminTasks allUsers={allUsers} />;
             break;
         default:
             content = <AdminHome />;

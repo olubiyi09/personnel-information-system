@@ -1,0 +1,49 @@
+.adminAttendance {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.filters {
+    margin-bottom: 15px;
+}
+
+.filters label {
+    margin-right: 10px;
+}
+
+.adminAttendance input[type="date"],
+.adminAttendance input[type="text"] {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.attendanceTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.attendanceTable th,
+.attendanceTable td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.attendanceTable th {
+    background-color: #114232;
+    color: #f5f4a7;
+    font-weight: bold;
+    text-align: left;
+}
+
+.attendanceTable tbody tr:nth-child(even) {
+    background-color: #f5f4a7;
+}
+
+/* .attendanceTable tbody tr:hover {
+    background-color: #e0e0e0;
+} */
