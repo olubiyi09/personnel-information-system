@@ -8,11 +8,36 @@ const AdminAttendance = () => {
     const [attendanceData, setAttendanceData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [selectedDate, setSelectedDate] = useState('');
+
     const dispatch = useDispatch();
+
+    // Set default date to current date if not set
+    useEffect(() => {
+        if (!selectedDate) {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0
+            const day = String(today.getDate()).padStart(2, '0');
+            const currentDate = `${year}-${month}-${day}`;
+            setSelectedDate(currentDate);
+        }
+    }, [selectedDate]);
 
     useEffect(() => {
         fetchAttendanceData();
     }, []);
+
+    useEffect(() => {
+        // Filter data based on selected date whenever selectedDate or attendanceData changes
+        const filtered = attendanceData.filter(item => {
+            const itemDate = new Date(item.date).toISOString().split('T')[0];
+            // console.log(itemDate);
+            return itemDate === selectedDate;
+        });
+
+        // Reverse the array to show the latest attendance at the top
+        setFilteredData(filtered.reverse());
+    }, [selectedDate, attendanceData]);
 
     const fetchAttendanceData = async () => {
         try {
@@ -23,14 +48,12 @@ const AdminAttendance = () => {
             if (Array.isArray(data)) {
                 setAttendanceData(data);
 
-                const currentDate = new Date().toISOString().split('T')[0];
-                setSelectedDate(currentDate);
-
-                // Filter data based on the current date
+                // No need to set selectedDate here anymore
                 const filtered = data.filter(item => {
                     const itemDate = new Date(item.createdAt).toISOString().split('T')[0];
-                    return itemDate === currentDate;
+                    return itemDate === selectedDate;
                 });
+                console.log(filtered);
 
                 // Reverse the array to show the latest attendance at the top
                 setFilteredData(filtered.reverse());
@@ -47,15 +70,6 @@ const AdminAttendance = () => {
     const handleDateChange = (e) => {
         const selectedDate = e.target.value;
         setSelectedDate(selectedDate);
-
-        // Filter data based on selected date
-        const filtered = attendanceData.filter(item => {
-            const itemDate = new Date(item.createdAt).toISOString().split('T')[0];
-            return itemDate === selectedDate;
-        });
-
-        // Reverse the array to show the latest attendance at the top
-        setFilteredData(filtered.reverse());
     };
 
     const formatDate = (dateString) => {
@@ -83,16 +97,20 @@ const AdminAttendance = () => {
                         <th>Check-Out Time</th>
                     </tr>
                 </thead>
-                <tbody>
-                    {filteredData.map(item => (
-                        <tr key={item._id}>
-                            <td>{item.fullname}</td>
-                            <td>{formatDate(item.createdAt)}</td>
-                            <td>{item.checkIn}</td>
-                            <td>{item.checkOut}</td>
-                        </tr>
-                    ))}
-                </tbody>
+                {filteredData.length < 1 ? (
+                    <p>No Attendance for this day yet</p>
+                ) : (
+                    <tbody>
+                        {filteredData.map(item => (
+                            <tr key={item._id}>
+                                <td>{item.fullname}</td>
+                                <td>{formatDate(item.createdAt)}</td>
+                                <td>{item.checkIn}</td>
+                                <td>{item.checkOut}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                )}
             </table>
         </div>
     );

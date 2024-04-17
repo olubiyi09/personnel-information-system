@@ -13,11 +13,18 @@ const Attendance = () => {
     const currentUser = useSelector((state) => state.users.currentUser);
     const dispatch = useDispatch();
 
+    const getFormattedDate = () => {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0
+        const day = String(today.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
 
     const handleTimeIn = async () => {
         try {
             dispatch(setLoading(true));
-            const currentDate = new Date().toISOString().split('T')[0];
+            const currentDate = getFormattedDate(); // Get date in YYYY-MM-DD format
 
             const requestBody = {
                 userID: currentUser._id,
@@ -64,7 +71,7 @@ const Attendance = () => {
     const handleTimeOut = async () => {
         try {
             dispatch(setLoading(true));
-            const currentDate = new Date().toISOString().split('T')[0]; // Get date in YYYY-MM-DD format
+            const currentDate = getFormattedDate(); // Get date in YYYY-MM-DD format
 
             const requestBody = {
                 userID: currentUser._id,

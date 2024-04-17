@@ -11,7 +11,7 @@ const AdminNavbar = ({ onItemClick }: any) => {
 
     return (
         <section>
-            <div className="">
+            <div className="mb-8">
                 <nav className={styles.nav}>
                     <ul>
                         <li className={activeItem === 'home' ? styles.active : ''} onClick={() => handleItemClick('home')}>

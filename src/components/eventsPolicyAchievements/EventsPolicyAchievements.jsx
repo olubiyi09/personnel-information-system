@@ -1,40 +1,54 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './EventsPolicyAchievements.module.css';
+import { useDispatch } from 'react-redux';
+import { setLoading } from '@/redux/loaderSlide';
+import axios from 'axios';
 
 const EventsPolicyAchievements = () => {
-    // Dummy data for demonstration
-    const items = [
-        {
-            id: 1,
-            title: "Company Picnic",
-            date: "April 15, 2024",
-            description: "Join us for a fun-filled day at the annual company picnic!",
-        },
-        {
-            id: 2,
-            title: "New Remote Work Policy",
-            date: "March 28, 2024",
-            description: "We have updated our remote work policy. Please review the changes.",
-        },
-        {
-            id: 3,
-            title: "Employee of the Month",
-            date: "March 15, 2024",
-            description: "Congratulations to John Smith for being the Employee of the Month!",
-        },
-    ];
+    const [allItems, setAllItems] = useState()
+    const dispatch = useDispatch();
+
+    const getAllPost = async () => {
+        try {
+            dispatch(setLoading(true));
+            const response = await axios.get("/api/updates");
+            setAllItems(response.data.data);
+            // console.log(response.data.data);
+        } catch (error) {
+            // toast.error("something went wrong")
+        } finally {
+            dispatch(setLoading(false));
+        }
+    };
+
+    useEffect(() => {
+        getAllPost();
+    }, []);
+
+    const formatDateTime = (dateTimeString) => {
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        };
+        const formattedDateTime = new Date(dateTimeString).toLocaleString(undefined, options);
+        return formattedDateTime;
+    };
 
     return (
         <div className={styles.container}>
             <h2>Updates</h2>
             <ul className={styles.list}>
-                {items.map((item) => (
-                    <li key={item.id} className={styles.item}>
+                {allItems && allItems.slice().reverse().slice(0, 4).map((item) => (
+                    <li key={item._id} className={styles.item}>
                         <div className={styles.itemHeader}>
                             <h3 className={styles.title}>{item.title}</h3>
-                            <span className={styles.date}>{item.date}</span>
+                            <span className={styles.date}>{formatDateTime(item.date)}</span>
                         </div>
-                        <p className={styles.description}>{item.description}</p>
+                        <p className={styles.description}>{item.content}</p>
                     </li>
                 ))}
             </ul>
