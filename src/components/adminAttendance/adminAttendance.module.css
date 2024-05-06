@@ -43,7 +43,3 @@
 .attendanceTable tbody tr:nth-child(even) {
     background-color: #f5f4a7;
 }
-
-/* .attendanceTable tbody tr:hover {
-    background-color: #e0e0e0;
-} */

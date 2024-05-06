@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from "./AdminAttendance.module.css";
 import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setLoading } from '@/redux/loaderSlide';
 
 const AdminAttendance = () => {
@@ -16,7 +16,7 @@ const AdminAttendance = () => {
         if (!selectedDate) {
             const today = new Date();
             const year = today.getFullYear();
-            const month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0
+            const month = String(today.getMonth() + 1).padStart(2, '0');
             const day = String(today.getDate()).padStart(2, '0');
             const currentDate = `${year}-${month}-${day}`;
             setSelectedDate(currentDate);

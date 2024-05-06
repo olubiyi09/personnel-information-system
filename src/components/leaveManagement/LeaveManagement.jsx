@@ -97,7 +97,7 @@ const LeaveManagement = () => {
                     </thead>
                     <tbody>
                         {displayHistory.length > 0 ? (
-                            displayHistory.map((leave, index) => (
+                            displayHistory.reverse().map((leave, index) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
                                     <td>{leave.fullname}</td>
