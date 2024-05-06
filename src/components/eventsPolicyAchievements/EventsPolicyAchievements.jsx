@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './EventsPolicyAchievements.module.css';
+import styles from "./EventsPolicyAchievements.module.css"
 import { useDispatch } from 'react-redux';
 import { setLoading } from '@/redux/loaderSlide';
 import axios from 'axios';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from "./AdminAttendance.module.css";
+import styles from "./adminAttendance.module.css"
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setLoading } from '@/redux/loaderSlide';
