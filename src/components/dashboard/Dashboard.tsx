@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import Calendar from '../calendar/Calendar';
-import EventsPolicyAchievements from '../EventsPolicyAchievements/EventsPolicyAchievements';
+import EventsPolicyAchievements from "../eventsPolicyAchievements/EventsPolicyAchievements"
 import styles from "./Dashboard.module.css";
 import Loader from '../loader/Loader';
 import { useSelector } from 'react-redux';
