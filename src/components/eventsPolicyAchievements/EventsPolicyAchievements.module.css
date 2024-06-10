@@ -1,6 +1,7 @@
 .container {
     margin-bottom: 20px;
     margin-top: .7rem;
+    max-width: 650px;
 }
 
 .container h2 {

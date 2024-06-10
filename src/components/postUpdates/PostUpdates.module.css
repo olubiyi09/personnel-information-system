@@ -74,14 +74,14 @@
 .modalContent form button {
     padding: 8px 16px;
     font-size: 16px;
-    background-color: #28a745;
+    background-color: #114232;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 .modalContent form button:hover {
-    background-color: #218838;
+    background-color: #114232;
 }
 
 .postTable {
