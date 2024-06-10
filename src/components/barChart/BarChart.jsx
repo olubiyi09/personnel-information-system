@@ -16,7 +16,7 @@ const BarChart = ({ data }) => {
             chartInstance.current = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Total Users', 'Approved Employees', 'Total Supervisor', 'UnApproved Users'],
+                    labels: ['Total Users', 'Leave Applications', 'Total Supervisor', 'UnApproved Users'],
                     datasets: [{
                         label: 'Number of Users',
                         data: data,
